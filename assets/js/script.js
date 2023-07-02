@@ -32,7 +32,7 @@ const chein = (id) => {
     listaDeServicio.forEach((list) =>
         list.id === id
             ? (list.estado = !list.estado)
-            : console.log('Error al cambiar el estado 😥')
+            : console.log('Error al cambiar')
     );
 
     renderizarLista(listaDeServicio);
@@ -45,7 +45,7 @@ const del = (id) => {
     if (index != -1) {
         listaDeServicio.splice(index, 1);
     } else {
-        console.log('Error al borrar 😥');
+        console.log('Error al eliminar');
     }
 
     renderizarLista(listaDeServicio);
@@ -67,7 +67,7 @@ document.getElementById('agregar').addEventListener('click', () => {
 
     } else {
         lista.classList.add('is-invalid');
-        lista.placeholder = 'No puede estar vacio!';
+        lista.placeholder = 'Error ingrese el texto';
     }
 });
 
