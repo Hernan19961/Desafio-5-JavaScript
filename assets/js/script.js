@@ -1,8 +1,8 @@
 let listaDeServicio = [
-    { id: 1, tarea: 'Ir al medico', estado: true },
+    { id: 1, tarea: 'Ir al medico', estado: false },
     { id: 2, tarea: 'Irnos de vacaciones', estado: false },
-    { id: 3, tarea: 'Salir de viajes con la familia', estado: true },
-    { id: 4, tarea: 'entregar desafios javascript', estado: false},
+    { id: 3, tarea: 'Salir de viajes con la familia', estado: false },
+    { id: 4, tarea: 'entregar desafios javascript', estado: true},
 ];
 
 // funcion para renderizar
@@ -37,12 +37,12 @@ const chein = (id) => {
 
 // funcion para eliminar 
 const del = (id) => {
-    const index = listaDeServicio.findIndex((list) => list.id === id);
+    const index = listaDeServicio.findIndex((list) => list.id == id);
 
     if (index != -1) {
         listaDeServicio.splice(index, 1);
     } else {
-        console.log('Error al eliminar');
+        console.log("Error al eliminar");
     }
 
     renderizarTarea(listaDeServicio);
@@ -58,7 +58,7 @@ document.getElementById('button').addEventListener('click', () => {
             estado: false,
         };
 
-        listaDeServicio.unshift(list);
+        listaDeServicio.push(list);
         renderizarTarea(listaDeServicio);
         lista.value = '';
 
@@ -69,12 +69,8 @@ document.getElementById('button').addEventListener('click', () => {
 });
 
 const generarId = (listaDeServicio) => {
-    return listaDeServicio.length ? listaDeServicio[listaDeServicio.length - 1].id + 1 : 1;
-};
+    return listaDeServicio.length ? listaDeServicio[listaDeServicio.length - 1].id + 1 : 1; };
 
-// document.getElementById('nuevaTarea').addEventListener('click', (element) => {
-//     element.target.classList.remove('is-invalid');
-//     element.target.placeholder = '';
-// });
+
 
 renderizarTarea(listaDeServicio);
