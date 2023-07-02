@@ -1,4 +1,3 @@
-// arreglo
 let listaDeServicio = [
     { id: 1, tarea: 'Ir al medico', estado: true },
     { id: 2, tarea: 'Irnos de vacaciones', estado: false },
@@ -6,36 +5,34 @@ let listaDeServicio = [
     { id: 4, tarea: 'entregar desafios javascript', estado: false},
 ];
 
-
-// funcion para renderizar el html
-const renderizarLista = (listaDeServicio) => {
+// funcion para renderizar
+const renderizarTarea = (listaDeServicio) => {
     let html = '';
 
     listaDeServicio.forEach((list) => {
         html += `<tr>
                     <td>${list.id}</td>
                     <td>${list.tarea}</td><td><button onclick="chein(${list.id})">${list.estado
-                ? '<i class="bi bi-clipboard-check-fill"></i>'
-                : '<i class="bi bi-clipboard-fill"></i>'
+                ? '<i class="fa-solid fa-square-check"></i>'
+                : '<i class="fa-regular fa-square-check"></i>'
             }</button></td>
                     <td><button onclick="del(${list.id
-            })"><i class="bi bi-trash-fill"></i></button></td>
+            })"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>`;
     });
 
-    document.getElementById('listaDeServicio').innerHTML = html;
-    document.getElementById('total').innerHTML = listaDeServicio.length;
-    document.getElementById('realizadas').innerHTML = listaDeServicio.filter((list) => list.estado == true).length;
+    document.querySelector("#listaDeServicio").innerHTML = html;
+    document.querySelector("#total").innerHTML = listaDeServicio.length;
+    document.querySelector("#realizadas").innerHTML = listaDeServicio.filter((list) => list.estado == true).length;
 };
 
 const chein = (id) => {
     listaDeServicio.forEach((list) =>
-        list.id === id
-            ? (list.estado = !list.estado)
-            : console.log('Error al cambiar')
+    list.id === id
+        ? (list.estado = !list.estado)
+        : console.log("Error ")
     );
-
-    renderizarLista(listaDeServicio);
+    renderizarTarea(listaDeServicio);
 };
 
 // funcion para eliminar 
@@ -48,10 +45,10 @@ const del = (id) => {
         console.log('Error al eliminar');
     }
 
-    renderizarLista(listaDeServicio);
+    renderizarTarea(listaDeServicio);
 };
 
-document.getElementById('agregar').addEventListener('click', () => {
+document.getElementById('button').addEventListener('click', () => {
     const lista = document.getElementById('nuevaTarea');
 
     if (lista.value) {
@@ -61,13 +58,13 @@ document.getElementById('agregar').addEventListener('click', () => {
             estado: false,
         };
 
-        listaDeServicio.push(list);
-        renderizarLista(listaDeServicio);
+        listaDeServicio.unshift(list);
+        renderizarTarea(listaDeServicio);
         lista.value = '';
 
     } else {
         lista.classList.add('is-invalid');
-        lista.placeholder = 'Error ingrese el texto';
+        lista.placeholder = 'Error al ingresar el texto';
     }
 });
 
@@ -75,10 +72,9 @@ const generarId = (listaDeServicio) => {
     return listaDeServicio.length ? listaDeServicio[listaDeServicio.length - 1].id + 1 : 1;
 };
 
+// document.getElementById('nuevaTarea').addEventListener('click', (element) => {
+//     element.target.classList.remove('is-invalid');
+//     element.target.placeholder = '';
+// });
 
-document.getElementById('nuevaTarea').addEventListener('click', (element) => {
-    element.target.classList.remove('is-invalid');
-    element.target.placeholder = '';
-});
-
-renderizarLista(listaDeServicio);
+renderizarTarea(listaDeServicio);
